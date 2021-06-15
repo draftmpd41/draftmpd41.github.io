@@ -14,11 +14,7 @@ var gVisibleLayers = new Set();
 var gCollection = {};
 var firstRunDone = false; // for preventing 3-time calling of mapStops() on startup.
 
-// $.ajaxSetup({
-//    headers:{
-//       'Authorization': "auth username and password"
-//    }
-// });
+
 // ######################################
 // Initiate Leaflet MAP
 // background layers, using Leaflet-providers plugin. See https://github.com/leaflet-extras/leaflet-providers
@@ -72,7 +68,7 @@ $(document).ready(function() {
     
 	setTimeout(function () {
 		sidebar.open('home');
-	}, 2000);
+	}, 500);
 	loadCSV();
 
 });
@@ -82,7 +78,7 @@ $(document).ready(function() {
 
 function loadCSV() {
 	csvFile = './config/draftmpd41_layers.csv';
-	$('#status').html(`Loading..`);
+	// $('#status').html(`Loading..`);
 	// papa parse load csv
 	Papa.parse(csvFile, {
 		download: true,
@@ -95,7 +91,7 @@ function loadCSV() {
 
 		}, // end of complete
         error: function(err, file, inputElem, reason) {
-            $('#status').html(`Could not load ${csvFile}`);
+            // $('#status').html(`Could not load ${csvFile}`);
         },
 
 	});
@@ -119,10 +115,11 @@ function loadLayers(data) {
 		row = {
             "id": r.shapefile,
             "pid": r.group,
-            "name": `${r.name}`,
+            "name": `${r.name} <span style="background-color: ${r.color}; float: left; width: 20px; height: 80%; margin: 5px; "></span>`,
             "shapefile": r.shapefile,
             "color": r.color,
-            "type": r.type
+            "type": r.type,
+            "origname": r.name
         };
         simTreeData.push(row);
 	}); // end of forEach loop
@@ -141,7 +138,7 @@ function loadLayers(data) {
             updateMapLayers(item);
         }
     });
-    $('#status').html(`Loaded layers`);
+    // $('#status').html(`Loaded layers`);
 }
 
 function updateMapLayers(selectedLayers) {
@@ -152,7 +149,7 @@ function updateMapLayers(selectedLayers) {
 		console.log(r.shapefile);
 		newSelection.add(r);
 	});
-	console.log('newSelection', newSelection);
+	// console.log('newSelection', newSelection);
 	
 	newSelection.forEach(r => {
 		// console.log(r.shapefile, 'in newSelection');
@@ -201,7 +198,8 @@ function loadGeojson(r) {
 			        	renderer: myRenderer
 			        };
 			    }
-			}).bindTooltip(`${r.name}`);
+			}).bindTooltip(`${r.origname}`, {sticky:true, opacity:0.5})
+			.bindPopup(`${r.origname}<br>Group: ${r.pid}`, {sticky:true, opacity:0.5});
 
     	} else {
     		gCollection[r.shapefile] = L.geoJson(geo, {

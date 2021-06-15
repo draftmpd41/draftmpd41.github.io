@@ -72,6 +72,11 @@ ul.sim-tree {
 #stops {
     width: 100%;
 }
+
+.legend { float: right; width: 20px; height: 80%; margin: 5px; }
+.greendot {
+    background-color: #00ff00;
+}
 </style>
 </head>
 <body>
@@ -82,11 +87,10 @@ ul.sim-tree {
 <div class="sidebar-tabs">
 <ul role="tablist">
     <li><a href="#home" role="tab" onclick="tabulatorRedraw()"><i class="fa fa-bars"></i></a></li>
-    <!--
-    <li><a href="#stopDetailsSection" role="tab"><i class="fa fa-map-marker"></i></a></li>
+    <!-- <li><a href="#stopDetailsSection" role="tab"><i class="fa fa-map-marker"></i></a></li> -->
     <li class="disabled"><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
-    <li><a href="https://github.com/Turbo87/sidebar-v2" role="tab" target="_blank"><i class="fa fa-github"></i></a></li>
-    -->
+    <li><a href="https://github.com/draftmpd41/draftmpd41.github.io" role="tab" target="_blank"><i class="fa fa-github"></i></a></li>
+    
 </ul>
 <ul role="tablist">
     <li><a href="#settings" role="tab"><i class="fa fa-info-circle"></i></a></li>
@@ -101,14 +105,8 @@ ul.sim-tree {
         <span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
     </h1>
     <br>
-    <h3>UNDER<br>CONSTRUCTION</h3>
-    <div id="status"></div>
     <div id="tree"></div>
-    <!--
-    <br>
-    <p id="status" class="alert alert-primary">Loading, please wait..</p>
-    <p class="alert alert-warning"> <small></small></p>
-    -->
+    <p>Note: Currently displaying only; Citizens inputs feature development in progress.</p>
     
 </div>
 <!--
@@ -126,11 +124,16 @@ ul.sim-tree {
 <div class="sidebar-pane" id="settings">
 <h1 class="sidebar-header">About<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
 <br>
-<p>Explanation</p>
+<!-- <p>Explanation</p> -->
 <small>
-    View the code: https://github.com/draftmpd41
-    <br>An initiative by <a href="https://github.com/rajesvariparasa" target="_blank">Rajesvari Parasa</a>
-    <br>Coding by <a href="https://nikhilvj.co.in" target="_blank">Nikhil VJ</a> from Kaisyn Consultancy and Training Pvt Ltd
+    <p>An initiative by <a href="https://github.com/rajesvariparasa" target="_blank">Rajesvari Parasa</a></p>
+    <p>Coding by <a href="https://nikhilvj.co.in" target="_blank">Nikhil VJ</a> from Kaisyn Consultancy and Training Pvt Ltd</p>
+    <br>
+    <p>Ref:<br>
+    <a href="https://twitter.com/mbd2041/status/1348156082019913729">https://twitter.com/mbd2041/status/1348156082019913729</a>
+    <a href="https://timesofindia.indiatimes.com/city/delhi/80-in-survey-say-no-clue-about-ddas-masterplan/articleshow/80193521.cms">https://timesofindia.indiatimes.com/city/delhi/80-in-survey-say-no-clue-about-ddas-masterplan/articleshow/80193521.cms</a>
+    <a href="https://igsss.org/wp-content/uploads/2020/12/Assessment-of-Peoples-Awareness-on-Delhi-Master-Plan-2021-41-1.pdf">https://igsss.org/wp-content/uploads/2020/12/Assessment-of-Peoples-Awareness-on-Delhi-Master-Plan-2021-41-1.pdf</a>
+
 </small>
 
 </p>
