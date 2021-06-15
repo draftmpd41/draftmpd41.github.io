@@ -25,7 +25,14 @@ var esriWorld = L.tileLayer.provider('Esri.WorldImagery');
 var gStreets = L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{maxZoom: 20, subdomains:['mt0','mt1','mt2','mt3']});
 var gHybrid = L.tileLayer('https://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{maxZoom: 20, subdomains:['mt0','mt1','mt2','mt3']});
 
-var baseLayers = { "CartoDB Voyager":cartoVoyager, "OpenStreetMap.org" : OSM, "CartoDB Light": cartoPositron, "CartoDB Dark": cartoDark, "ESRI Satellite": esriWorld, "gStreets": gStreets, "gHybrid": gHybrid };
+var baseLayers = { 
+	"CartoDB Light": cartoPositron, 
+	"CartoDB Dark": cartoDark, 
+	"OpenStreetMap.org" : OSM, 
+	"CartoDB Voyager":cartoVoyager, 
+	"ESRI Satellite": esriWorld, 
+	"gStreets": gStreets, 
+	"gHybrid": gHybrid };
 
 var map = new L.Map('map', {
 	center: STARTLOCATION,
