@@ -14,6 +14,11 @@ var gVisibleLayers = new Set();
 var gCollection = {};
 var firstRunDone = false; // for preventing 3-time calling of mapStops() on startup.
 
+// $.ajaxSetup({
+//    headers:{
+//       'Authorization': "auth username and password"
+//    }
+// });
 // ######################################
 // Initiate Leaflet MAP
 // background layers, using Leaflet-providers plugin. See https://github.com/leaflet-extras/leaflet-providers
@@ -182,9 +187,9 @@ function loadGeojson(r) {
 	gLoadedFiles.add(r);
 	var filename = `data/${r.shapefile}`;
 	// https://stackoverflow.com/a/5048056/4355695
-	$.get(filename)
-    .done(function(result) {
-	    var geo = JSON.parse(result); 
+	$.getJSON(filename)
+    .done(function(geo) {
+	    // var geo = JSON.parse(result); 
     	// console.log(geo);
     	if(r.type == 'Polygon' || r.type=='MultiPolygon') {
     		gCollection[r.shapefile] = L.geoJson(geo, {
