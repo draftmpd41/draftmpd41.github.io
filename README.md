@@ -11,5 +11,4 @@ Ref:
 - https://timesofindia.indiatimes.com/city/delhi/80-in-survey-say-no-clue-about-ddas-masterplan/articleshow/80193521.cms
 - https://igsss.org/wp-content/uploads/2020/12/Assessment-of-Peoples-Awareness-on-Delhi-Master-Plan-2021-41-1.pdf
 
-Starting with basic frontend created using qgis2web plugin in QGIS
 
