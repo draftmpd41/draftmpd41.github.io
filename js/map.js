@@ -133,10 +133,6 @@ function loadLayers(data) {
 }
 
 function updateMapLayers(selectedLayers) {
-	console.log('updateMapLayers called');
-	console.log(selectedLayers);
-
-
 	// filtering out group names
 	var newSelection = new Set();
 	selectedLayers.forEach(r => {
@@ -145,17 +141,15 @@ function updateMapLayers(selectedLayers) {
 		newSelection.add(r);
 	});
 	console.log('newSelection', newSelection);
-
 	
 	newSelection.forEach(r => {
-		console.log(r.shapefile, 'in newSelection');
+		// console.log(r.shapefile, 'in newSelection');
 		// check if geojson has already been loaded
 		if (gLoadedFiles.has(r)) {
 			console.log(r.shapefile,"already loaded.");
 
-			if( gVisibleLayers.has(r)) {
-				;
-			} else {
+			if( !gVisibleLayers.has(r)) {
+				// geojson is already loaded, but not visible. Now that it's enabled, make it visible
 				planLayer.addLayer(gCollection[r.shapefile]);
 				console.log(`making ${r.shapefile} visible`);
 				gVisibleLayers.add(r);
@@ -173,23 +167,6 @@ function updateMapLayers(selectedLayers) {
 		planLayer.removeLayer(gCollection[r.shapefile]);
 		gVisibleLayers.delete(r);
 	});
-	
-
-	// var newLayersSet = new Set([...newSelection].filter( x => !gLoadedFiles.has(x) ));
-
-	// console.log('removeLayersSet',removeLayersSet);
-	// console.log('newLayersSet',newLayersSet);
-
-	// for (let item of removeLayersSet) {
-	// 	gLoadedFiles.delete(item);
-	// }
-
-	// for (let item of newLayersSet) {
-	// 	gLoadedFiles.add(item);
-	// 	loadGeojson(item);
-	// }
-	// console.log('new gLoadedFiles',gLoadedFiles);
-
 
 }
 
@@ -201,7 +178,7 @@ function loadGeojson(r) {
 	$.get(filename)
     .done(function(result) {
 	    var geo = JSON.parse(result); 
-    	console.log(geo);
+    	// console.log(geo);
     	if(r.type == 'Polygon' || r.type=='MultiPolygon') {
     		gCollection[r.shapefile] = L.geoJson(geo, {
 			    style: function (feature) {
