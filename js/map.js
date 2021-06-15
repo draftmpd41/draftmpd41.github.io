@@ -212,7 +212,8 @@ function loadGeojson(r) {
 			        	renderer: myRenderer
 			        };
 			    }
-			}).bindTooltip(`${r.name}`);
+			}).bindTooltip(`${r.origname}`, {sticky:true, opacity:0.5})
+			.bindPopup(`${r.origname}<br>Group: ${r.pid}`, {sticky:true, opacity:0.5});
     	}
     	planLayer.addLayer(gCollection[r.shapefile]);
     	gLoadedFiles.add(r);
