@@ -9,6 +9,9 @@ var planLayer = new L.layerGroup();
 var inputsLayer = new L.layerGroup();
 
 var simTreeData = [];
+var gLoadedFiles = new Set();
+var gVisibleLayers = new Set();
+var gCollection = {};
 var firstRunDone = false; // for preventing 3-time calling of mapStops() on startup.
 
 // ######################################
@@ -96,7 +99,8 @@ function loadLayers(data) {
 			simTreeData.push({
 				"id": r.group,
                 "pid": "",
-                "name": r.group
+                "name": r.group,
+                "type": 'grouping'
             });
             groupsList.push(r.group);
 		}
@@ -104,13 +108,13 @@ function loadLayers(data) {
             "id": r.shapefile,
             "pid": r.group,
             "name": `${r.name}`,
-            "jsonFile": r.shapefile,
+            "shapefile": r.shapefile,
             "color": r.color,
             "type": r.type
         };
         simTreeData.push(row);
 	}); // end of forEach loop
-	console.log(simTreeData);
+	// console.log(simTreeData);
 	// now, lauch simTree:
     simTree({
         el: '#tree',
@@ -128,9 +132,112 @@ function loadLayers(data) {
     $('#status').html(`Loaded layers`);
 }
 
-function updateMapLayers(item) {
-	console.log(item);
+function updateMapLayers(selectedLayers) {
+	console.log('updateMapLayers called');
+	console.log(selectedLayers);
+
+
+	// filtering out group names
+	var newSelection = new Set();
+	selectedLayers.forEach(r => {
+		if(r.type=='grouping') return;
+		console.log(r.shapefile);
+		newSelection.add(r);
+	});
+	console.log('newSelection', newSelection);
+
+	
+	newSelection.forEach(r => {
+		console.log(r.shapefile, 'in newSelection');
+		// check if geojson has already been loaded
+		if (gLoadedFiles.has(r)) {
+			console.log(r.shapefile,"already loaded.");
+
+			if( gVisibleLayers.has(r)) {
+				;
+			} else {
+				planLayer.addLayer(gCollection[r.shapefile]);
+				console.log(`making ${r.shapefile} visible`);
+				gVisibleLayers.add(r);
+			}
+		} else {
+			loadGeojson(r); // make it visible also
+		}
+
+	});
+
+	// make unselected layers invisible
+	var removeLayersSet = new Set([...gVisibleLayers].filter( x => !newSelection.has(x) ));
+	removeLayersSet.forEach(r => {
+		console.log('Have to remove from visible:',r.shapefile);
+		planLayer.removeLayer(gCollection[r.shapefile]);
+		gVisibleLayers.delete(r);
+	});
+	
+
+	// var newLayersSet = new Set([...newSelection].filter( x => !gLoadedFiles.has(x) ));
+
+	// console.log('removeLayersSet',removeLayersSet);
+	// console.log('newLayersSet',newLayersSet);
+
+	// for (let item of removeLayersSet) {
+	// 	gLoadedFiles.delete(item);
+	// }
+
+	// for (let item of newLayersSet) {
+	// 	gLoadedFiles.add(item);
+	// 	loadGeojson(item);
+	// }
+	// console.log('new gLoadedFiles',gLoadedFiles);
+
+
 }
+
+function loadGeojson(r) {
+	console.log("loading geojson:",r.shapefile);
+	gLoadedFiles.add(r);
+	var filename = `data/${r.shapefile}`;
+	// https://stackoverflow.com/a/5048056/4355695
+	$.get(filename)
+    .done(function(result) {
+	    var geo = JSON.parse(result); 
+    	console.log(geo);
+    	if(r.type == 'Polygon' || r.type=='MultiPolygon') {
+    		gCollection[r.shapefile] = L.geoJson(geo, {
+			    style: function (feature) {
+			        return {
+			        	stroke: false,
+			        	fillColor: r.color,
+			        	fillOpacity: 0.6,
+			        	renderer: myRenderer
+			        };
+			    }
+			}).bindTooltip(`${r.name}`);
+
+    	} else {
+    		gCollection[r.shapefile] = L.geoJson(geo, {
+			    style: function (feature) {
+			        return {
+			        	stroke: true,
+			        	color: r.color,
+			        	weight: 3,
+			        	opacity: 0.6,
+			        	renderer: myRenderer
+			        };
+			    }
+			}).bindTooltip(`${r.name}`);
+    	}
+    	planLayer.addLayer(gCollection[r.shapefile]);
+    	gLoadedFiles.add(r);
+    	gVisibleLayers.add(r);
+    })
+    .fail(function(jqXHR, textStatus, errorThrown) { 
+    	console.log(jqXHR);
+    	console.log(textStatus);
+    });
+}
+
+
 function tabulatorRedraw() {
 	;
 }
