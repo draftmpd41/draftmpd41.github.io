@@ -5,7 +5,7 @@
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="lib/leaflet.css" />
 <link href="lib/jquery-ui.css" rel="stylesheet">
 <link href="lib/bootstrap.v4.0.0.min.css" crossorigin="anonymous" alt="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
@@ -74,8 +74,10 @@ ul.sim-tree {
 }
 
 .legend { float: right; width: 20px; height: 80%; margin: 5px; }
-.greendot {
-    background-color: #00ff00;
+
+
+.red {
+  color: red;
 }
 </style>
 </head>
@@ -88,7 +90,8 @@ ul.sim-tree {
 <ul role="tablist">
     <li><a href="#home" role="tab" onclick="tabulatorRedraw()"><i class="fa fa-bars"></i></a></li>
     <!-- <li><a href="#stopDetailsSection" role="tab"><i class="fa fa-map-marker"></i></a></li> -->
-    <li class="disabled"><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
+    <li><a href="#submit" role="tab"><i class="fa fa-pencil"></i></a></li>
+    <li><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
     <li><a href="https://github.com/draftmpd41/draftmpd41.github.io" role="tab" target="_blank"><i class="fa fa-github"></i></a></li>
     
 </ul>
@@ -116,11 +119,34 @@ ul.sim-tree {
 <br>
 </div>
 -->
-<!--
-<div class="sidebar-pane" id="messages">
-    <h1 class="sidebar-header">Messages<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+
+<div class="sidebar-pane" id="submit">
+    <h1 class="sidebar-header">Share your input<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+    <br><p>Location: <input disabled id="latlong"><br>
+    Category: <input id="category"><br>
+    Message:<br>
+    <textarea id="message"></textarea></p>
+    <p>Your details:<br>
+    Name: <input id="name"><br>
+    Email: <input id="email"><br>
+    Mobile: <input id="mobile"><br>
+    <label for="declaration"><input type="checkbox" name="declaration" value="declaration" id="declaration" onchange="" class="ml-4"><small>I hereby declare that my contact details are accurate</small></label>
+    <label for="consent"><input type="checkbox" name="consent" value="consent" id="consent" onchange="" class="ml-4"><small>I hereby consent to my contact details being shared by the site managers for connecting with fellow citizens etc</small></label>
+    </p>
+    <button class="btn btn-primary">Submit</button>
+
+    <small>Your contact info won't be displayed on the map when displaying your message</small>
+
 </div>
--->
+
+<div class="sidebar-pane" id="messages">
+    <h1 class="sidebar-header">Share your input<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+    <br>
+    <div id="displayMessage">
+        Click on a marker on the map to view the input
+    </div>
+</div>
+
 <div class="sidebar-pane" id="settings">
 <h1 class="sidebar-header">About<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
 <br>

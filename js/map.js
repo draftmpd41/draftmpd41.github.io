@@ -6,6 +6,10 @@
 const STARTLOCATION = [28.6, 77.1];
 const BOUNDS = [[27.72,76.08], [29.26,78.09]];
 
+// map crosshair size etc:
+const crosshairPath = 'lib/focus-black.svg';
+const crosshairSize = 30;
+
 var planLayer = new L.layerGroup();
 var inputsLayer = new L.layerGroup();
 
@@ -64,6 +68,24 @@ planLayer.addTo(map);
 inputsLayer.addTo(map);
 
 var layerControl = L.control.layers(baseLayers, overlays, {collapsed: true, autoZIndex:false}).addTo(map); 
+
+// Add in a crosshair for the map. From https://gis.stackexchange.com/a/90230/44746
+var crosshairIcon = L.icon({
+    iconUrl: crosshairPath,
+    iconSize:     [crosshairSize, crosshairSize], // size of the icon
+    iconAnchor:   [crosshairSize/2, crosshairSize/2], // point of the icon which will correspond to marker's location
+});
+crosshair = new L.marker(map.getCenter(), {icon: crosshairIcon, interactive:false});
+crosshair.addTo(map);
+// Move the crosshair to the center of the map when the user pans
+map.on('move', function(e) {
+    var currentLocation = map.getCenter();
+    crosshair.setLatLng(currentLocation);
+    $('#position').html(`${currentLocation.lat.toFixed(3)},${currentLocation.lng.toFixed(3)}`);
+});
+
+// lat, long in url
+var hash = new L.Hash(map);
 
 // ######################################
 // RUN ON PAGE LOAD
