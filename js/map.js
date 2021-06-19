@@ -185,6 +185,18 @@ function loadLayers(data) {
             updateMapLayers(item);
         }
     });
+
+    // Auto-select one layer
+    setTimeout(function () {
+        autoSelected = ['Recreational -1'];
+        // autoSelected = ['Government','Recreational -1','Residential'];
+        data.forEach(r => {
+            if( autoSelected.includes(r.name) ) {
+                document.querySelectorAll(`[data-id="${r.shapefile}"] > a`)[0].click();
+            }
+        });
+    }, 1000);
+    
     // $('#status').html(`Loaded layers`);
 }
 
