@@ -5,7 +5,7 @@
 <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 <link rel="stylesheet" href="lib/leaflet.css" />
 <link href="lib/jquery-ui.css" rel="stylesheet">
 <link href="lib/bootstrap.v4.0.0.min.css" crossorigin="anonymous" alt="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
@@ -50,18 +50,18 @@ ul.sim-tree {
 
 @media (min-width: 1200px) {
     .sidebar {
-        width: 360px;
+        width: 450px;
     }
     .sidebar p {
         width: 80%;
     }
     .sidebar-left ~ .sidebar-map .leaflet-left {
-        left: 370px;
+        left: 450px;
     }
 }
 
 .sidebar .alert {
-    width: 70%;
+    width: 100%;
 }
 
 .sidebar-pane {
@@ -74,8 +74,11 @@ ul.sim-tree {
 }
 
 .legend { float: right; width: 20px; height: 80%; margin: 5px; }
-.greendot {
-    background-color: #00ff00;
+
+
+red {
+  color: red;
+  font-weight: bold;
 }
 </style>
 </head>
@@ -86,14 +89,15 @@ ul.sim-tree {
 <!-- Nav tabs -->
 <div class="sidebar-tabs">
 <ul role="tablist">
-    <li><a href="#home" role="tab" onclick="tabulatorRedraw()"><i class="fa fa-bars"></i></a></li>
+    <li><a href="#home" role="tab" onclick="tabulatorRedraw()" title="layers"><i class="fa fa-bars"></i></a></li>
     <!-- <li><a href="#stopDetailsSection" role="tab"><i class="fa fa-map-marker"></i></a></li> -->
-    <li class="disabled"><a href="#messages" role="tab"><i class="fa fa-envelope"></i></a></li>
-    <li><a href="https://github.com/draftmpd41/draftmpd41.github.io" role="tab" target="_blank"><i class="fa fa-github"></i></a></li>
+    <li><a href="#submit" role="tab" title="Share your Input"><i class="fa fa-pencil"></i></a></li>
+    <li><a href="#messages" role="tab" title="Citizens Inputs"><i class="fa fa-envelope"></i></a></li>
+    <li><a href="https://github.com/draftmpd41/draftmpd41.github.io" role="tab" target="_blank" title="See the code"><i class="fa fa-github"></i></a></li>
     
 </ul>
 <ul role="tablist">
-    <li><a href="#settings" role="tab"><i class="fa fa-info-circle"></i></a></li>
+    <li><a href="#settings" role="tab" title="About"><i class="fa fa-info-circle"></i></a></li>
 </ul>
 </div>
 
@@ -106,7 +110,7 @@ ul.sim-tree {
     </h1>
     <br>
     <div id="tree"></div>
-    <p>Note: Currently displaying only; Citizens inputs feature development in progress.</p>
+    <span id="fetchInputs_status"></span>
     
 </div>
 <!--
@@ -116,11 +120,43 @@ ul.sim-tree {
 <br>
 </div>
 -->
-<!--
-<div class="sidebar-pane" id="messages">
-    <h1 class="sidebar-header">Messages<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+
+<div class="sidebar-pane" id="submit">
+    <h1 class="sidebar-header">Share your input<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+    <br><p>Location: <span id="latlong"></span> 
+    <br><small>move map crosshair to target location</small><br>
+    Category<red>*</red> : <input id="category"><br>
+    Message<red>*</red> :<br>
+    <textarea id="message"></textarea></p>
+    <p>Your details:<br>
+    Name<red>*</red> : <input id="name"><br>
+    Email<red>*</red> : <input id="email"><br>
+    Mobile : <input id="mobile"><br>
+    <label for="declaration"><input type="checkbox" name="declaration" id="declaration"> <small><red>*</red> I hereby declare that my contact details are accurate</small></label>
+    <label for="consent"><input type="checkbox" name="consent" value="consent" id="consent" onchange=""> <small>I hereby consent to my contact details being shared by the site managers for connecting with fellow citizens etc (optional)</small></label>
+    </p>
+    <button class="btn btn-primary" id="submitButton" onclick="submitInput()">Submit</button><br>
+    <span class="submitStatus"></span><br>
+
+    <small>Notes:<br>
+    <ul>
+        <li>Your contact details won't be displayed on the map when displaying your message</li>
+        <li>Submitted inputs are subject to moderation to rule out spam</li>
+    </ul></small>
+
 </div>
--->
+
+<div class="sidebar-pane" id="messages">
+    <h1 class="sidebar-header">Citizens inputs<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+    <br>
+    Total inputs submitted: <span id="submittedNum"></span><br>
+    Approved: <span id="approvedNum"></span><br>
+    <br>
+    <div id="displayMessage">
+        Click on a marker on the map to view the input
+    </div>
+</div>
+
 <div class="sidebar-pane" id="settings">
 <h1 class="sidebar-header">About<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
 <br>
@@ -145,8 +181,8 @@ ul.sim-tree {
 
 <div id="map" class="sidebar-map"></div>
 
-<script src="js/map.js"></script>
 <script src="js/api.js"></script>
+<script src="js/map.js"></script>
 
 </body>
 </html>
