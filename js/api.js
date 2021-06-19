@@ -5,8 +5,12 @@ var APIpath = 'https://server2.nikhilvj.co.in/draftmpd41_backend/API/';
 if (window.location.host =="localhost:8000") APIpath = 'http://localhost:5610/API/';
 
 function submitInput() {
+    // declaration check
+    if(! $("#declaration")[0].checked ) {
+        alert('Please check On the declaration first.');
+        return;
+    }
     var currentLocation = map.getCenter();
-    var llHolder = $('#latlong').val().split(',')
     var payload = {
         "lat": parseFloat(currentLocation.lat.toFixed(6)),
         "lon": parseFloat(currentLocation.lng.toFixed(6)),
@@ -15,15 +19,17 @@ function submitInput() {
         "name": $('#name').val(),
         "email": $('#email').val(),
         "mobile": $('#mobile').val(),
+        "consent": $("#consent")[0].checked
     };
+    console.log(payload);
 
     $(".submitStatus").html("Saving to DB..");
 
     $.ajax({
         url : `${APIpath}addInput`,
-        xhrFields: {
-            withCredentials: true
-        },
+        // xhrFields: {
+        //     withCredentials: true
+        // },
         type : 'POST',
         data : JSON.stringify(payload),
         cache: false,
@@ -46,5 +52,50 @@ function submitInput() {
 }
 
 function resetForm() {
+    $('#category').val('');
+    $('#message').val('');
+    $('#name').val('');
+    $('#email').val('');
+    $('#mobile').val('');
+    $('#category').val('');
+    $("#declaration")[0].checked = false;
+    $("#consent")[0].checked = false;
+}
 
+function fetchInputs() {
+    var payload = {};
+    $('#fetchInputs_status').html("Loading Citizens Inputs..");
+    $.ajax({
+        url : `${APIpath}listInputs`,
+        // xhrFields: {
+        //     withCredentials: true
+        // },
+        type : 'POST',
+        data : JSON.stringify(payload),
+        cache: false,
+        processData: false,    // tell jQuery not to process the data
+        contentType: false,    // tell jQuery not to set contentType
+        success : function(returndata) {
+            console.log(returndata);
+            var data = JSON.parse(returndata);
+            mapInputs(data);
+
+        },
+        error: function(jqXHR, exception) {
+            console.log('error:',jqXHR.responseText);
+            var response = JSON.parse(jqXHR.responseText);
+            $(".submitStatus").html(response.message);
+        }
+    });
+}
+
+function mapInputs(data) {
+    
+    $('#approvedNum').html(data.approved.length);
+    $('#submittedNum').html(data.submitted.length + data.approved.length);
+
+    data.approved.forEach(r => {
+        ;
+    })
+    $('#fetchInputs_status').html(`Citizens Inputs loaded.`);
 }

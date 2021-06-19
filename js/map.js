@@ -101,7 +101,9 @@ $(document).ready(function() {
 	setTimeout(function () {
 		sidebar.open('home');
 	}, 500);
+	resetForm();
 	loadCSV();
+	fetchInputs();
 
 });
 
