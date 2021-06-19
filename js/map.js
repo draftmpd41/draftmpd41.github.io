@@ -81,7 +81,13 @@ crosshair.addTo(map);
 map.on('move', function(e) {
     var currentLocation = map.getCenter();
     crosshair.setLatLng(currentLocation);
-    $('#position').html(`${currentLocation.lat.toFixed(3)},${currentLocation.lng.toFixed(3)}`);
+    if(map.getZoom() <= 13) {
+    	$('#latlong').html(`Zoom in for a proper location`);
+    	document.getElementById('submitButton').disabled = true;	
+    } else {
+	    $('#latlong').html(`${currentLocation.lat.toFixed(4)},${currentLocation.lng.toFixed(4)}`);
+	    document.getElementById('submitButton').disabled = false;
+	}
 });
 
 // lat, long in url

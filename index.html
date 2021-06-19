@@ -50,7 +50,7 @@ ul.sim-tree {
 
 @media (min-width: 1200px) {
     .sidebar {
-        width: 360px;
+        width: 450px;
     }
     .sidebar p {
         width: 80%;
@@ -122,7 +122,8 @@ ul.sim-tree {
 
 <div class="sidebar-pane" id="submit">
     <h1 class="sidebar-header">Share your input<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-    <br><p>Location: <input disabled id="latlong"><br>
+    <br><p>Location: <span id="latlong"></span> 
+    <br><small>move map crosshair to target location</small><br>
     Category: <input id="category"><br>
     Message:<br>
     <textarea id="message"></textarea></p>
@@ -130,18 +131,23 @@ ul.sim-tree {
     Name: <input id="name"><br>
     Email: <input id="email"><br>
     Mobile: <input id="mobile"><br>
-    <label for="declaration"><input type="checkbox" name="declaration" value="declaration" id="declaration" onchange="" class="ml-4"><small>I hereby declare that my contact details are accurate</small></label>
-    <label for="consent"><input type="checkbox" name="consent" value="consent" id="consent" onchange="" class="ml-4"><small>I hereby consent to my contact details being shared by the site managers for connecting with fellow citizens etc</small></label>
+    <label for="declaration"><input type="checkbox" name="declaration" id="declaration"> <small>I hereby declare that my contact details are accurate</small></label>
+    <label for="consent"><input type="checkbox" name="consent" value="consent" id="consent" onchange=""> <small>I hereby consent to my contact details being shared by the site managers for connecting with fellow citizens etc</small></label>
     </p>
-    <button class="btn btn-primary">Submit</button>
+    <button class="btn btn-primary" id="submitButton">Submit</button><br>
+    <span class="submitStatus"></span><br>
 
-    <small>Your contact info won't be displayed on the map when displaying your message</small>
+    <small>Your personal details won't be displayed on the map when displaying your message</small>
 
 </div>
 
 <div class="sidebar-pane" id="messages">
-    <h1 class="sidebar-header">Share your input<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
+    <h1 class="sidebar-header">Citizens inputs<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
     <br>
+    Total inputs gathered: <br>
+    Submitted: <span id="submitNum"></span><br>
+    Approved: <span id="approveNum"></span><br>
+
     <div id="displayMessage">
         Click on a marker on the map to view the input
     </div>
@@ -171,8 +177,8 @@ ul.sim-tree {
 
 <div id="map" class="sidebar-map"></div>
 
-<script src="js/map.js"></script>
 <script src="js/api.js"></script>
+<script src="js/map.js"></script>
 
 </body>
 </html>
