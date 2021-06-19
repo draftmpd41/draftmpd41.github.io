@@ -2,7 +2,7 @@
 
 var APIpath = 'https://server2.nikhilvj.co.in/draftmpd41_backend/API/';
 
-if (window.location.host =="localhost:8000") APIpath = 'http://localhost:5610/API/';
+// if (window.location.host =="localhost:8000") APIpath = 'http://localhost:5610/API/';
 
 function submitInput() {
     // declaration check
@@ -76,7 +76,7 @@ function fetchInputs() {
         processData: false,    // tell jQuery not to process the data
         contentType: false,    // tell jQuery not to set contentType
         success : function(returndata) {
-            console.log(returndata);
+            // console.log(returndata);
             var data = JSON.parse(returndata);
             mapInputs(data);
 
@@ -89,13 +89,3 @@ function fetchInputs() {
     });
 }
 
-function mapInputs(data) {
-    
-    $('#approvedNum').html(data.approved.length);
-    $('#submittedNum').html(data.submitted.length + data.approved.length);
-
-    data.approved.forEach(r => {
-        ;
-    })
-    $('#fetchInputs_status').html(`Citizens Inputs loaded.`);
-}
