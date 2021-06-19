@@ -69,7 +69,7 @@ var approvedLayer = new L.layerGroup(null, {pane: 'approvedPane'});
 
 // SVG renderer
 var myRenderer = L.canvas({ padding: 0.5, pane: 'planPane' });
-var myRendererLine = L.canvas({ padding: 0.5, pane: 'linePane' });
+// var myRendererLine = L.canvas({ padding: 0.5, pane: 'linePane' });
 
 
 var overlays = {
@@ -255,8 +255,8 @@ function loadGeojson(r) {
                         stroke: true,
                         color: r.color,
                         weight: 3,
-                        opacity: 0.6,
-                        renderer: myRendererLine
+                        opacity: 0.6
+                        // renderer: myRendererLine
                     };
                 }
             }).bindTooltip(`${r.origname}`, {sticky:true, opacity:0.5})
