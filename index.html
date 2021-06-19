@@ -110,7 +110,10 @@ red {
     </h1>
     <br>
     <div id="tree"></div>
-    <span id="fetchInputs_status"></span>
+    <span id="fetchInputs_status"></span><br>
+    Total inputs submitted: <span id="submittedNum"></span><br>
+    Approved: <span id="approvedNum"></span><br>
+    
     
 </div>
 <!--
@@ -142,15 +145,13 @@ red {
     <ul>
         <li>Your contact details won't be displayed on the map when displaying your message</li>
         <li>Submitted inputs are subject to moderation to rule out spam</li>
+        <li>Strict no-no on all special chars including single and double quotes</li>
     </ul></small>
 
 </div>
 
 <div class="sidebar-pane" id="messages">
     <h1 class="sidebar-header">Citizens inputs<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-    <br>
-    Total inputs submitted: <span id="submittedNum"></span><br>
-    Approved: <span id="approvedNum"></span><br>
     <br>
     <div id="displayMessage">
         Click on a marker on the map to view the input

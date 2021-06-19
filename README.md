@@ -10,8 +10,12 @@ Development plan layers are loaded locally/statically.
 
 For Citizens Inputs submission and display, the frontend makes API calls to a python backend hooked into a MySQL DB, code is at [draftmpd41_backend](https://github.com/draftmpd41/draftmpd41_backend).
 
+Initiative and initial data extraction by: [Rajesvari Parasa](https://github.com/rajesvariparasa)
 
-Ref: 
+Coding by: [Nikhil VJ](https://nikhilvj.co.in) on behalf of Kaisyn Consultancy and Training Pvt Ltd
+
+
+Ref Articles: 
 - https://twitter.com/mbd2041/status/1348156082019913729
 - https://timesofindia.indiatimes.com/city/delhi/80-in-survey-say-no-clue-about-ddas-masterplan/articleshow/80193521.cms
 - https://igsss.org/wp-content/uploads/2020/12/Assessment-of-Peoples-Awareness-on-Delhi-Master-Plan-2021-41-1.pdf

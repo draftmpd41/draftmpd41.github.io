@@ -4,7 +4,7 @@
 // ######################################
 /* 1. GLOBAL VARIABLES */
 const STARTLOCATION = [28.6, 77.1];
-const BOUNDS = [[27.72,76.08], [29.26,78.09]];
+const BOUNDS = [[27.7,75.5], [29.5,78.5]];
 
 // map crosshair size etc:
 const crosshairPath = 'lib/focus-black.svg';
