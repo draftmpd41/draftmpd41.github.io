@@ -4,6 +4,7 @@
 // ######################################
 /* 1. GLOBAL VARIABLES */
 const STARTLOCATION = [28.6, 77.1];
+const BOUNDS = [[27.72,76.08], [29.26,78.09]];
 
 var planLayer = new L.layerGroup();
 var inputsLayer = new L.layerGroup();
@@ -40,7 +41,10 @@ var map = new L.Map('map', {
 	zoom: 10,
 	layers: [cartoPositron],
 	scrollWheelZoom: true,
-	maxZoom: 20
+	maxZoom: 20,
+	minZoom: 10,
+	maxBounds: BOUNDS,
+	maxBoundsViscosity: 0.5
 });
 
 var sidebar = L.control.sidebar('sidebar').addTo(map);
