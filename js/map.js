@@ -251,7 +251,10 @@ function loadGeojson(r) {
             gCollection[r.shapefile] = L.geoJson(geo, {
                 style: function (feature) {
                     return {
-                        stroke: false,
+                        stroke: true,
+						color: '#000000',
+						opacity: 0.5,
+						weight: 0.5,
                         fillColor: r.color,
                         fillOpacity: 0.6,
                         renderer: myRenderer
