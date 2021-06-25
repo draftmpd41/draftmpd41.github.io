@@ -1,20 +1,20 @@
 group,name,shapefile,color,type
-Base,Commercial,BASE_MAP_2041_COMMERCIAL.geojson,#a6cee3,Polygon
-Base,Government,BASE_MAP_2041_GOVERNMENT.geojson,#1f78b4,MultiPolygon
-Base,Green Belt Waterbody,BASE_MAP_2041_GREEN_BELT_WATERBODY_1.geojson,#b2df8a,Polygon
-Base,Industrial,BASE_MAP_2041_INDUSTRIAL.geojson,#33a02c,Polygon
-Base,PSP -1,BASE_MAP_2041_PSP_1.geojson,#fb9a99,Polygon
-Base,Recreational -1,BASE_MAP_2041_RECREATIONAL_1.geojson,#e31a1c,Polygon
-Base,Residential,BASE_MAP_2041_RESIDENTIAL.geojson,#fdbf6f,Polygon
-Base,Transportation - 1,BASE_MAP_2041_TRANSPORTATION_1.geojson,#ff7f00,MultiPolygon
-Base,Transportation - 2,BASE_MAP_2041_TRANSPORTATION_2.geojson,#cab2d6,MultiPolygon
-Base,Utility - 1,BASE_MAP_2041_UTILITY_1.geojson,#6a3d9a,Polygon
-Base,Utility - 2,BASE_MAP_2041_UTILITY_2.geojson,#ffff99,MultiPolygon
+Base Map 2041,Commercial,BASE_MAP_2041_COMMERCIAL.geojson,#a6cee3,Polygon
+Base Map 2041,Government,BASE_MAP_2041_GOVERNMENT.geojson,#1f78b4,MultiPolygon
+Base Map 2041,Green Belt Waterbody,BASE_MAP_2041_GREEN_BELT_WATERBODY_1.geojson,#b2df8a,Polygon
+Base Map 2041,Industrial,BASE_MAP_2041_INDUSTRIAL.geojson,#33a02c,Polygon
+Base Map 2041,Public & Semi Public Facilities-1,BASE_MAP_2041_PSP_1.geojson,#fb9a99,Polygon
+Base Map 2041,Recreational -1,BASE_MAP_2041_RECREATIONAL_1.geojson,#e31a1c,Polygon
+Base Map 2041,Residential,BASE_MAP_2041_RESIDENTIAL.geojson,#fdbf6f,Polygon
+Base Map 2041,Transportation - 1,BASE_MAP_2041_TRANSPORTATION_1.geojson,#ff7f00,MultiPolygon
+Base Map 2041,Transportation - 2,BASE_MAP_2041_TRANSPORTATION_2.geojson,#cab2d6,MultiPolygon
+Base Map 2041,Utility - 1,BASE_MAP_2041_UTILITY_1.geojson,#6a3d9a,Polygon
+Base Map 2041,Utility - 2,BASE_MAP_2041_UTILITY_2.geojson,#ffff99,MultiPolygon
 Extra Layers,Builtup,EXTRA_LAYERS_Builtup.geojson,#b15928,Polygon
 Extra Layers,Unauthorised Colonies,EXTRA_LAYERS_Delhi_UC.geojson,#fccde5,MultiPolygon
 Extra Layers,Floodplain,EXTRA_LAYERS_FLOODPLAIN.geojson,#fff123,LineString
 Extra Layers,Laldora Greenbelt Void Fill,EXTRA_LAYERS_LALDORA_GREENBELT_VOID_FILL.geojson,#8dd3c7,Polygon
-Extra Layers,LDRA Village,EXTRA_LAYERS_LDRA_VILLAGE.geojson,#bebada,MultiPolygon
+Extra Layers,LDRA Villages,EXTRA_LAYERS_LDRA_VILLAGE.geojson,#bebada,MultiPolygon
 Road Railway Metro,Barapulla Elevated Road,ROAD_RAILWAY_METRO_LINES_Barapulla_Elevated_Road.geojson,#fb8072,LineString
 Road Railway Metro,DMRC Metro Line,ROAD_RAILWAY_METRO_LINES_DMRC_Metro_Line.geojson,#80b1d3,LineString
 Road Railway Metro,HSR Alignment,ROAD_RAILWAY_METRO_LINES_HSR_Alignment.geojson,#fdb462,LineString
