@@ -3,12 +3,10 @@
 
 // ######################################
 /* 1. GLOBAL VARIABLES */
-const STARTLOCATION = [28.6, 77.1];
-const BOUNDS = [[27.7,75.5], [29.5,78.5]];
 
 // map crosshair size etc:
 const crosshairPath = 'lib/focus-black.svg';
-const crosshairSize = 30;
+const crosshairSize = 50;
 
 
 var simTreeData = [];
@@ -40,13 +38,13 @@ var baseLayers = {
 
 var map = new L.Map('map', {
     center: STARTLOCATION,
-    zoom: 10,
+    zoom: STARTZOOM,
     layers: [cartoPositron],
     scrollWheelZoom: true,
-    maxZoom: 20,
-    minZoom: 10,
+    maxZoom: MAXZOOM,
+    minZoom: MINZOOM,
     maxBounds: BOUNDS,
-    maxBoundsViscosity: 0.5
+    maxBoundsViscosity: MAXBOUNDSVISCOSITY
 });
 
 var sidebar = L.control.sidebar('sidebar').addTo(map);
@@ -124,10 +122,8 @@ $(document).ready(function() {
 // FUNCTIONS
 
 function loadCSV() {
-    csvFile = './config/draftmpd41_layers.csv';
-    // $('#status').html(`Loading..`);
     // papa parse load csv
-    Papa.parse(csvFile, {
+    Papa.parse(LAYERS_CSV, {
         download: true,
         header: true,
         skipEmptyLines: true,
@@ -138,7 +134,7 @@ function loadCSV() {
 
         }, // end of complete
         error: function(err, file, inputElem, reason) {
-            // $('#status').html(`Could not load ${csvFile}`);
+            alert(`Failed to load ${LAYERS_CSV}. Please check LAYERS_CSV in config.js`);
         },
 
     });
@@ -188,10 +184,8 @@ function loadLayers(data) {
 
     // Auto-select one layer
     setTimeout(function () {
-        autoSelected = ['Recreational -1'];
-        // autoSelected = ['Government','Recreational -1','Residential'];
         data.forEach(r => {
-            if( autoSelected.includes(r.name) ) {
+            if( r.default === 'Y' ) {
                 document.querySelectorAll(`[data-id="${r.shapefile}"] > a`)[0].click();
             }
         });
@@ -241,7 +235,7 @@ function updateMapLayers(selectedLayers) {
 function loadGeojson(r) {
     console.log("loading geojson:",r.shapefile);
     gLoadedFiles.add(r);
-    var filename = `data/${r.shapefile}`;
+    var filename = `${SHAPES_FOLDER}${r.shapefile}`;
     // https://stackoverflow.com/a/5048056/4355695
     $.getJSON(filename)
     .done(function(geo) {
@@ -284,6 +278,9 @@ function loadGeojson(r) {
     .fail(function(jqXHR, textStatus, errorThrown) { 
         console.log(jqXHR);
         console.log(textStatus);
+        let message = `Failed to load ${r.shapefile}. Check SHAPES_FOLDER in config.js for correct path. Include / at end.`;
+        console.log(message);
+        alert(message);
     });
 }
 
