@@ -89,10 +89,9 @@ red {
 <!-- Nav tabs -->
 <div class="sidebar-tabs">
 <ul role="tablist">
-    <li><a href="#home" role="tab" onclick="tabulatorRedraw()" title="layers"><i class="fa fa-bars"></i></a></li>
-    <!-- <li><a href="#stopDetailsSection" role="tab"><i class="fa fa-map-marker"></i></a></li> -->
-    <li><a href="#submit" role="tab" title="Share your Input"><i class="fa fa-pencil"></i></a></li>
-    <li><a href="#messages" role="tab" title="Citizens Inputs"><i class="fa fa-envelope"></i></a></li>
+    <li><a href="#home" role="tab" title="layers"><i class="fa fa-bars"></i></a></li>
+    <!-- <li><a href="#submit" role="tab" title="Share your Input"><i class="fa fa-pencil"></i></a></li>
+    <li><a href="#messages" role="tab" title="Citizens Inputs"><i class="fa fa-envelope"></i></a></li> -->
     <li><a href="https://github.com/draftmpd41/draftmpd41.github.io" role="tab" target="_blank" title="See the code"><i class="fa fa-github"></i></a></li>
     
 </ul>
@@ -110,52 +109,8 @@ red {
     </h1>
     <br>
     <div id="tree"></div>
-    <span id="fetchInputs_status"></span><br>
-    Total inputs submitted: <span id="submittedNum"></span><br>
-    Approved: <span id="approvedNum"></span><br>
-    
-    
-</div>
-<!--
-<div class="sidebar-pane" id="stopDetailsSection">
-<h2 class="sidebar-header"><span class="stop_name">Stop Name</span>
-<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h2>
-<br>
-</div>
--->
-
-<div class="sidebar-pane" id="submit">
-    <h1 class="sidebar-header">Share your input<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
     <br><p>Location: <span id="latlong"></span> 
-    <br><small>move map crosshair to target location</small><br>
-    Category<red>*</red> : <input id="category"><br>
-    Message<red>*</red> :<br>
-    <textarea id="message"></textarea></p>
-    <p>Your details:<br>
-    Name<red>*</red> : <input id="name"><br>
-    Email<red>*</red> : <input id="email"><br>
-    Mobile : <input id="mobile"><br>
-    <label for="declaration"><input type="checkbox" name="declaration" id="declaration"> <small><red>*</red> I hereby declare that my contact details are accurate</small></label>
-    <label for="consent"><input type="checkbox" name="consent" value="consent" id="consent" onchange=""> <small>I hereby consent to my contact details being shared by the site managers for connecting with fellow citizens etc (optional)</small></label>
-    </p>
-    <button class="btn btn-primary" id="submitButton" onclick="submitInput()">Submit</button><br>
-    <span class="submitStatus"></span><br>
-
-    <small>Notes:<br>
-    <ul>
-        <li>Your contact details won't be displayed on the map when displaying your message</li>
-        <li>Submitted inputs are subject to moderation to rule out spam</li>
-        <li>Strict no-no on all special chars including single and double quotes</li>
-    </ul></small>
-
-</div>
-
-<div class="sidebar-pane" id="messages">
-    <h1 class="sidebar-header">Citizens inputs<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
-    <br>
-    <div id="displayMessage">
-        Click on a marker on the map to view the input
-    </div>
+        
 </div>
 
 <div class="sidebar-pane" id="settings">
@@ -183,7 +138,6 @@ red {
 <div id="map" class="sidebar-map"></div>
 
 <script src="config.js"></script>
-<script src="js/api.js"></script>
 <script src="js/map.js"></script>
 
 </body>
