@@ -57,23 +57,16 @@ L.control.scale({metric:true, imperial:false}).addTo(map);
 // map panes
 map.createPane('planPane'); map.getPane('planPane').style.zIndex = 540;
 map.createPane('linePane'); map.getPane('linePane').style.zIndex = 550;
-map.createPane('submittedPane'); map.getPane('submittedPane').style.zIndex = 610;
-map.createPane('approvedPane'); map.getPane('approvedPane').style.zIndex = 620;
 
 // layers
 var planLayer = new L.layerGroup(null, {pane: 'planPane'});
-var submittedLayer = new L.layerGroup(null, {pane: 'submittedPane'});
-var approvedLayer = new L.layerGroup(null, {pane: 'approvedPane'});
 
 // SVG renderer
 var myRenderer = L.canvas({ padding: 0.5, pane: 'planPane' });
-// var myRendererLine = L.canvas({ padding: 0.5, pane: 'linePane' });
 
 
 var overlays = {
-    "Draft Plan": planLayer,
-    "Submitted Inputs": submittedLayer,
-    "Approved Inputs": approvedLayer
+    "Draft Plan": planLayer
 };
 planLayer.addTo(map);
 
@@ -91,13 +84,7 @@ crosshair.addTo(map);
 map.on('move', function(e) {
     var currentLocation = map.getCenter();
     crosshair.setLatLng(currentLocation);
-    if(map.getZoom() <= 13) {
-        $('#latlong').html(`Zoom in for a proper location`);
-        document.getElementById('submitButton').disabled = true;    
-    } else {
-        $('#latlong').html(`${currentLocation.lat.toFixed(4)},${currentLocation.lng.toFixed(4)}`);
-        document.getElementById('submitButton').disabled = false;
-    }
+    $('#latlong').html(`${currentLocation.lat.toFixed(4)},${currentLocation.lng.toFixed(4)}`);
 });
 
 // lat, long in url
@@ -108,14 +95,10 @@ var hash = new L.Hash(map);
 // RUN ON PAGE LOAD
 
 $(document).ready(function() {
-    
     setTimeout(function () {
         sidebar.open('home');
     }, 500);
-    resetForm();
     loadCSV();
-    fetchInputs();
-
 });
 
 // ######################################
@@ -284,93 +267,3 @@ function loadGeojson(r) {
     });
 }
 
-
-function tabulatorRedraw() {
-    ;
-}
-
-
-function mapInputs(data) {
-    
-    $('#approvedNum').html(data.approved.length);
-    $('#submittedNum').html(data.submitted.length + data.approved.length);
-
-    var circleMarkerOptions_submit = {
-        // renderer: myRenderer,
-        radius: 5,
-        fillColor: 'yellow',
-        color: 'gray',
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.8,
-        pane: 'submittedPane'
-    };
-
-    data.submitted.forEach(r => {
-        let lat = parseFloat(r.lat);
-        let lon = parseFloat(r.lon);
-        let tooltipContent = `${r.category} | ${r.name}`;
-        var marker = L.circleMarker([lat,lon], circleMarkerOptions_submit)
-            .bindTooltip(tooltipContent, {direction:'top', offset: [0,-5]});
-        marker.properties = r;
-        marker.addTo(submittedLayer);
-        marker.on('click', function() {
-            var content = `<p>Category: <b>${r.category}</b></br>
-            <div class="alert alert-secondary">${r.message}</div>
-            Shared by: <b>${r.name}</b><br>
-            <small>Shared on ${r.created_on}</b><br>
-            Location: ${lat},${lon} <small><button class="btn btn-link" onclick="map.panTo([${lat},${lon}])">go there</button></small><br>
-            ID: ${r.mid}<br><br>
-            <span class="alert alert-warning">Not approved yet</span>
-            </small></p>
-            `;
-            $('#displayMessage').html(content);
-
-            map.panTo([lat,lon]);
-            sidebar.open('messages');
-        });
-
-    });
-    if (!map.hasLayer(submittedLayer)) map.addLayer(submittedLayer);
-
-    var circleMarkerOptions_approved = {
-        // renderer: myRenderer,
-        radius: 5,
-        fillColor: 'blue',
-        color: 'gray',
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.8,
-        pane: 'approvedPane'
-    };
-
-    data.approved.forEach(r => {
-        let lat = parseFloat(r.lat);
-        let lon = parseFloat(r.lon);
-        let tooltipContent = `${r.category} | ${r.name}`;
-        var marker = L.circleMarker([lat,lon], circleMarkerOptions_approved)
-            .bindTooltip(tooltipContent, {direction:'top', offset: [0,-5]});
-        marker.properties = r;
-        marker.addTo(approvedLayer);
-        marker.on('click', function() {
-            var content = `<p>Category: <b>${r.category}</b></br>
-            <div class="alert alert-secondary">${r.message}</div>
-            Shared by: <b>${r.name}</b><br>
-            <small>Shared on ${r.created_on}</b><br>
-            Location: ${lat},${lon} <small><button class="btn btn-link" onclick="map.panTo([${lat},${lon}])">go there</button></small><br>
-            ID: ${r.mid}<br><br>
-            <span class="alert alert-success">Approved by mods</span>
-            </small></p>
-            `;
-            $('#displayMessage').html(content);
-
-            map.panTo([lat,lon]);
-            sidebar.open('messages');
-        });
-
-    });
-    if (!map.hasLayer(approvedLayer)) map.addLayer(approvedLayer);
-
-
-    $('#fetchInputs_status').html(`Citizens Inputs loaded.`);
-}

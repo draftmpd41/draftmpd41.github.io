@@ -6,8 +6,6 @@ A volunteers-setup map to show layers of MPD41 : Draft 2041 development plan of 
 
 Deployed as a static site on gihub pages.
 
-For Citizens Inputs submission and display, the frontend makes API calls to a python backend hooked into a MySQL DB, code is at [draftmpd41_backend](https://github.com/draftmpd41/draftmpd41_backend).
-
 Initiative and initial data extraction by: [Rajesvari Parasa](https://github.com/rajesvariparasa)
 
 Coding by: [Nikhil VJ](https://nikhilvj.co.in) on behalf of Kaisyn Consultancy and Training Pvt Ltd
