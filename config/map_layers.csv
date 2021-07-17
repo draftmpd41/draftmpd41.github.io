@@ -3,8 +3,8 @@ Base Map 2041,Commercial,,BASE_MAP_2041_COMMERCIAL.geojson,#a6cee3,Polygon
 Base Map 2041,Government,,BASE_MAP_2041_GOVERNMENT.geojson,#1f78b4,MultiPolygon
 Base Map 2041,Green Belt Waterbody,,BASE_MAP_2041_GREEN_BELT_WATERBODY_1.geojson,#b2df8a,Polygon
 Base Map 2041,Industrial,,BASE_MAP_2041_INDUSTRIAL.geojson,#33a02c,Polygon
-Base Map 2041,Public & Semi Public Facilities-1,,BASE_MAP_2041_PSP_1.geojson,#fb9a99,Polygon
-Base Map 2041,Recreational -1,Y,BASE_MAP_2041_RECREATIONAL_1.geojson,#e31a1c,Polygon
+Base Map 2041,Public & Semi Public Facilities,,BASE_MAP_2041_PSP_1.geojson,#fb9a99,Polygon
+Base Map 2041,Recreational,Y,BASE_MAP_2041_RECREATIONAL_1.geojson,#e31a1c,Polygon
 Base Map 2041,Residential,,BASE_MAP_2041_RESIDENTIAL.geojson,#fdbf6f,Polygon
 Base Map 2041,Transportation - 1,,BASE_MAP_2041_TRANSPORTATION_1.geojson,#ff7f00,MultiPolygon
 Base Map 2041,Transportation - 2,,BASE_MAP_2041_TRANSPORTATION_2.geojson,#cab2d6,MultiPolygon
