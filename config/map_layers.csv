@@ -1,8 +1,8 @@
 group,name,default,shapefile,color,type
-Base Map 2041,Commercial,,BASE_MAP_2041_COMMERCIAL.geojson,#800080,Polygon
+Base Map 2041,Commercial,,BASE_MAP_2041_COMMERCIAL.geojson,#FF0000,Polygon
 Base Map 2041,Government,,BASE_MAP_2041_GOVERNMENT.geojson,#808080,MultiPolygon
 Base Map 2041,Green Belt Waterbody,,BASE_MAP_2041_GREEN_BELT_WATERBODY_1.geojson,#00FF00,Polygon
-Base Map 2041,Industrial,,BASE_MAP_2041_INDUSTRIAL.geojson,#FFFF00,Polygon
+Base Map 2041,Industrial,,BASE_MAP_2041_INDUSTRIAL.geojson,#800080,Polygon
 Base Map 2041,Public & Semi Public Facilities,,BASE_MAP_2041_PSP_1.geojson,#0000FF,Polygon
 Base Map 2041,Recreational,Y,BASE_MAP_2041_RECREATIONAL_1.geojson,#008000,Polygon
 Base Map 2041,Residential,,BASE_MAP_2041_RESIDENTIAL.geojson,#FFFF00,Polygon
