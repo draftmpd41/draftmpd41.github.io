@@ -8,7 +8,7 @@ Base Map 2041,Recreational,Y,BASE_MAP_2041_RECREATIONAL_1.geojson,#008000,Polygo
 Base Map 2041,Residential,,BASE_MAP_2041_RESIDENTIAL.geojson,#FFFF00,Polygon
 Base Map 2041,Transportation - 1,,BASE_MAP_2041_TRANSPORTATION_1.geojson,#ff7f00,MultiPolygon
 Base Map 2041,Transportation - 2,,BASE_MAP_2041_TRANSPORTATION_2.geojson,#cab2d6,MultiPolygon
-Base Map 2041,Utility - 1,,BASE_MAP_2041_UTILITY_1.geojson,#6a3d9a,Polygon
+Base Map 2041,Utility - 1,,BASE_MAP_2041_UTILITY_1.geojson,#FFFF00,Polygon
 Base Map 2041,Utility - 2,,BASE_MAP_2041_UTILITY_2.geojson,#ffff99,MultiPolygon
 Extra Layers,Builtup,,EXTRA_LAYERS_Builtup.geojson,#b15928,Polygon
 Extra Layers,Unauthorised Colonies,,EXTRA_LAYERS_Delhi_UC.geojson,#fccde5,MultiPolygon
