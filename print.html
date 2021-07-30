@@ -12,8 +12,9 @@
 <link rel="stylesheet" href="lib/leaflet-sidebar.css" />
 <link href="lib/tabulator.min.css" rel="stylesheet">
 <link href="lib/simTree.css" rel="stylesheet">
-<link rel="stylesheet" href="lib/Leaflet.BigImage.min.css">
-
+<link rel="stylesheet" href="lib/leaflet-slider.css"/>
+<!-- <link rel="stylesheet" href="lib/Leaflet.BigImage.min.css">
+ -->
 <!-- Put the CSSs first and JSs next -->
 
 <script src="lib/jquery-3.3.1.min.js" type="text/javascript"></script>
@@ -26,9 +27,10 @@
 <script src="lib/tabulator.min.js" type="text/javascript"></script>
 <script src="lib/leaflet-hash.min.js"></script>
 <script src="lib/simTree.js"></script>
-<script src="lib/Leaflet.BigImage.min.js"></script>
+<script src="lib/leaflet-slider.js"></script>
+<!-- <script src="lib/Leaflet.BigImage.min.js"></script>
 <script src="lib/leaflet.browser.print.min.js"></script>
-<script src="https://unpkg.com/leaflet-image@latest/leaflet-image.js"></script>
+<script src="https://unpkg.com/leaflet-image@latest/leaflet-image.js"></script> -->
 
 <style>
 body {
@@ -72,6 +74,7 @@ ul.sim-tree {
     }
 }
 
+
 </style>
 </head>
 <body>
@@ -103,10 +106,12 @@ ul.sim-tree {
 </div>
 <div class="col-md-4">
     <br><h5><b>Colors, Opacity</b></h5>
-    <p>Change color of all layers: <input class="color" value="black" size="8"><!-- , font:<input class="fontColor" value="white" size="8"> -->  
+    <!-- <p>Change color of all layers: <input class="color" value="black" size="8">  
     <button onclick="changeColor()">Apply</button>
     <br>[Under Construction]
-    </p>
+    </p> -->
+    Fill Opacity: <div class="slidecontainer"><input type="range" min="1" max="100" value="50" class="slider" id="slider1"></div>
+    Border Opacity: <div class="slidecontainer"><input type="range" min="1" max="100" value="50" class="slider" id="slider2"></div>
 </div>
 </div>
 

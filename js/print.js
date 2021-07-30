@@ -57,3 +57,38 @@ function changeColor() {
 function zoomFit(){
 	map.fitBounds(planLayer.getBounds(), {padding:[5,5], maxZoom:17});
 }
+
+document.getElementById("slider1").value = 60;
+document.getElementById("slider2").value = 60;
+
+document.getElementById("slider1").oninput = function() {
+	planLayer.eachLayer(r => {
+		r.setStyle({ fillOpacity:this.value/100 });
+	});
+}
+
+document.getElementById("slider2").oninput = function() {
+	planLayer.eachLayer(r => {
+		r.setStyle({ opacity:this.value/100 });
+	});
+}
+
+// // Slider : https://github.com/Eclipse1979/leaflet-slider
+// slider = L.control.slider(function(value) {
+// 		//from https://gis.stackexchange.com/a/167173/44746
+// 		planLayer.eachLayer(r => {
+// 			r.setStyle({ fillOpacity:value/100 });
+// 		});
+		
+// 	}, { // slider options
+// 		//orientation:'vertical', 
+// 		position: 'topleft',
+// 		size: '250px',
+// 		min: 0, max: 100,
+// 		value: 70,
+// 		logo: 'O',
+// 		collapsed: false,
+// 		title: 'Set Opacity',
+// 		syncSlider: true // make slider immediately execute function on changing, instead of waiting for mouseup. see https://github.com/Eclipse1979/leaflet-slider/issues/4
+// 	}
+// ).addTo(map);
