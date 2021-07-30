@@ -29,11 +29,7 @@ var Esri2 = L.tileLayer.provider('Esri.WorldTopoMap');
 var Esri3 = L.tileLayer.provider('Esri.WorldGrayCanvas');
 var OpenTopoMap = L.tileLayer.provider('OpenTopoMap');
 var Stadia1 = L.tileLayer.provider('Stadia.AlidadeSmooth');
-var Thunderforest1 = L.tileLayer.provider('Thunderforest.MobileAtlas');
-var Thunderforest2 = L.tileLayer.provider('Thunderforest.Transport');
-var Thunderforest3 = L.tileLayer.provider('Thunderforest.Neighbourhood');
 var CyclOSM = L.tileLayer.provider('CyclOSM');
-var Jawg1 = L.tileLayer.provider('Jawg.Light');
 var Stamen1 = L.tileLayer.provider('Stamen.TonerLite');
 var Stamen2 = L.tileLayer.provider('Stamen.Terrain');
 
@@ -44,17 +40,13 @@ var baseLayers = {
     "OpenStreetMap.org" : OSM, 
     "CartoDB Voyager":cartoVoyager, 
     "Esri.WorldImagery": esriWorld,
+    "Esri.WorldTopoMap": Esri2,
+    "Esri.WorldGrayCanvas": Esri3,
+    "OpenTopoMap": OpenTopoMap,
     "Stamen.TonerLite": Stamen1,
     "Stamen.Terrain": Stamen2,
-    "Esri.WorldTopoMap": Esri2,
-    "Esri.WorldGrayCanvas": Esri3
-    "OpenTopoMap": OpenTopoMap,
     "Stadia.AlidadeSmooth": Stadia1,
-    "Thunderforest.MobileAtlas": Thunderforest1,
-    "Thunderforest.Transport": Thunderforest2,
-    "Thunderforest.Neighbourhood": Thunderforest3,
     "CyclOSM": CyclOSM,
-    "Jawg.Light": Jawg1
 };
 
 var map = new L.Map('map', {
