@@ -13,3 +13,7 @@ const SHAPES_FOLDER = 'data/';
 const LAYERS_CSV = 'config/map_layers.csv';
 
 // to make some layers visible by default when map loads, put "Y" under "default" column for them in the CSV.
+
+// Print related
+const ORIG_W = 1000;
+const ORIG_H = 1450;

@@ -78,26 +78,35 @@ ul.sim-tree {
 
 <div class="row no-print">
 <div class="col-md-4">
+    <br><h5><b>Layers</b></h5>
     <div id="tree"></div>
     Location: <span id="latlong"></span>
 </div>
-<div class="col-md-8">
-    Customize the map<br>
+<div class="col-md-4">
+    <br>
+    <h5><b>Customize the map</b></h5>
     <p>Change page dimensions:<br>
     Width:<input class="width" size="5" value="1000" type="number" min="100" max="100000" step="10">px, 
     Height:<input class="height" size="5" value="1450" type="number" min="100" max="100000" step="10">px<br>
-    <!-- Map part:<input class="ratio" size="5" value="69" type="number" min="20" max="100" step="1">% --> &nbsp;&nbsp;
     <button onclick="changeDimensions()">Apply</button>
     &nbsp; | &nbsp; 
     <a onclick="changeDimensions(true)" href="javascript:;">Reset</a>
+    | &nbsp; <span id="tileStatus"></span>
     </p>
     <!--Presets: <a>A4</a> | <a>A3</a> | <a>A2</a> | <a>A1</a>-->
     
-    <p>Change color: <input class="color" value="black" size="8">, font:<input class="fontColor" value="white" size="8">  <button onclick="changeColor()">Apply</button>
-    </p>
+    
 
-    <a onclick="zoomFit()" href="javascript:;">Fit map to Route</a> | 
-    <a onclick="window.print()" href="javascript:;">Print</a>
+    <a onclick="zoomFit()" href="javascript:;">Fit map to Layers</a> | 
+    <button onclick="window.print()" class="btn btn-primary">Print</button>
+    <br>
+</div>
+<div class="col-md-4">
+    <br><h5><b>Colors, Opacity</b></h5>
+    <p>Change color of all layers: <input class="color" value="black" size="8"><!-- , font:<input class="fontColor" value="white" size="8"> -->  
+    <button onclick="changeColor()">Apply</button>
+    <br>[Under Construction]
+    </p>
 </div>
 </div>
 
