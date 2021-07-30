@@ -12,7 +12,6 @@
 <link rel="stylesheet" href="lib/leaflet-sidebar.css" />
 <link href="lib/tabulator.min.css" rel="stylesheet">
 <link href="lib/simTree.css" rel="stylesheet">
-<link rel="stylesheet" href="lib/leaflet-slider.css"/>
 <!-- <link rel="stylesheet" href="lib/Leaflet.BigImage.min.css">
  -->
 <!-- Put the CSSs first and JSs next -->
@@ -27,7 +26,6 @@
 <script src="lib/tabulator.min.js" type="text/javascript"></script>
 <script src="lib/leaflet-hash.min.js"></script>
 <script src="lib/simTree.js"></script>
-<script src="lib/leaflet-slider.js"></script>
 <!-- <script src="lib/Leaflet.BigImage.min.js"></script>
 <script src="lib/leaflet.browser.print.min.js"></script>
 <script src="https://unpkg.com/leaflet-image@latest/leaflet-image.js"></script> -->
@@ -88,7 +86,7 @@ ul.sim-tree {
 <div class="col-md-4">
     <br>
     <h5><b>Customize the map</b></h5>
-    <p>Change page dimensions:<br>
+    <p>Change page dimensions: <small>can make it big!</small><br>
     Width:<input class="width" size="5" value="1000" type="number" min="100" max="100000" step="10">px, 
     Height:<input class="height" size="5" value="1450" type="number" min="100" max="100000" step="10">px<br>
     <button onclick="changeDimensions()">Apply</button>
@@ -105,13 +103,14 @@ ul.sim-tree {
     <br>
 </div>
 <div class="col-md-4">
-    <br><h5><b>Colors, Opacity</b></h5>
+    <br><h5><b>Transparency</b></h5>
     <!-- <p>Change color of all layers: <input class="color" value="black" size="8">  
     <button onclick="changeColor()">Apply</button>
     <br>[Under Construction]
     </p> -->
     Fill Opacity: <div class="slidecontainer"><input type="range" min="1" max="100" value="50" class="slider" id="slider1"></div>
     Border Opacity: <div class="slidecontainer"><input type="range" min="1" max="100" value="50" class="slider" id="slider2"></div>
+    Change the backround layer with the layer picker over the map.
 </div>
 </div>
 

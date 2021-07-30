@@ -102,7 +102,7 @@ var overlays = {
 };
 planLayer.addTo(map);
 
-var layerControl = L.control.layers(baseLayers, overlays, {collapsed: true, autoZIndex:false}).addTo(map); 
+var layerControl = L.control.layers(baseLayers, overlays, {collapsed: true, autoZIndex:false, position:'topleft'}).addTo(map); 
 
 
 
