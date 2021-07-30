@@ -47,9 +47,26 @@ var map = new L.Map('map', {
     maxBoundsViscosity: MAXBOUNDSVISCOSITY
 });
 
-var sidebar = L.control.sidebar('sidebar').addTo(map);
+if(!window.location.pathname.endsWith("print.html")) {
+    var sidebar = L.control.sidebar('sidebar').addTo(map);
+    $('.leaflet-container').css('cursor','crosshair'); // from https://stackoverflow.com/a/28724847/4355695 Changing mouse cursor to crosshairs
 
-$('.leaflet-container').css('cursor','crosshair'); // from https://stackoverflow.com/a/28724847/4355695 Changing mouse cursor to crosshairs
+    // Add in a crosshair for the map. From https://gis.stackexchange.com/a/90230/44746
+    var crosshairIcon = L.icon({
+        iconUrl: crosshairPath,
+        iconSize:     [crosshairSize, crosshairSize], // size of the icon
+        iconAnchor:   [crosshairSize/2, crosshairSize/2], // point of the icon which will correspond to marker's location
+    });
+    crosshair = new L.marker(map.getCenter(), {icon: crosshairIcon, interactive:false});
+    crosshair.addTo(map);
+    // Move the crosshair to the center of the map when the user pans
+    map.on('move', function(e) {
+        var currentLocation = map.getCenter();
+        crosshair.setLatLng(currentLocation);
+        $('#latlong').html(`${currentLocation.lat.toFixed(4)},${currentLocation.lng.toFixed(4)}`);
+    });
+}
+
 
 L.control.scale({metric:true, imperial:false}).addTo(map);
 
@@ -59,7 +76,8 @@ map.createPane('planPane'); map.getPane('planPane').style.zIndex = 540;
 map.createPane('linePane'); map.getPane('linePane').style.zIndex = 550;
 
 // layers
-var planLayer = new L.layerGroup(null, {pane: 'planPane'});
+var planLayer = new L.FeatureGroup(null, {pane: 'planPane'});
+// https://gis.stackexchange.com/a/180680/44746 use FeatureGroup instead of LayerGroup
 
 // SVG renderer
 var myRenderer = L.canvas({ padding: 0.5, pane: 'planPane' });
@@ -72,32 +90,27 @@ planLayer.addTo(map);
 
 var layerControl = L.control.layers(baseLayers, overlays, {collapsed: true, autoZIndex:false}).addTo(map); 
 
-// Add in a crosshair for the map. From https://gis.stackexchange.com/a/90230/44746
-var crosshairIcon = L.icon({
-    iconUrl: crosshairPath,
-    iconSize:     [crosshairSize, crosshairSize], // size of the icon
-    iconAnchor:   [crosshairSize/2, crosshairSize/2], // point of the icon which will correspond to marker's location
-});
-crosshair = new L.marker(map.getCenter(), {icon: crosshairIcon, interactive:false});
-crosshair.addTo(map);
-// Move the crosshair to the center of the map when the user pans
-map.on('move', function(e) {
-    var currentLocation = map.getCenter();
-    crosshair.setLatLng(currentLocation);
-    $('#latlong').html(`${currentLocation.lat.toFixed(4)},${currentLocation.lng.toFixed(4)}`);
-});
+
 
 // lat, long in url
 var hash = new L.Hash(map);
 
 
+// 2021-07-29: Image export, from https://github.com/pasichnykvasyl/Leaflet.BigImage
+// L.control.bigImage().addTo(map);
+
+// https://github.com/Igor-Vladyka/leaflet.browser.print
+// L.control.browserPrint().addTo(map)
+
 // ######################################
 // RUN ON PAGE LOAD
 
 $(document).ready(function() {
-    setTimeout(function () {
-        sidebar.open('home');
-    }, 500);
+    if(!window.location.pathname.endsWith("print.html")) {
+        setTimeout(function () {
+            sidebar.open('home');
+        }, 500);
+    }
     loadCSV();
 });
 
@@ -267,3 +280,16 @@ function loadGeojson(r) {
     });
 }
 
+// function makeImage() {
+//     leafletImage(map, function(err, canvas) {
+//         // now you have canvas
+//         // example thing to do with that canvas:
+//         var img = document.createElement('img');
+//         var dimensions = map.getSize();
+//         img.width = dimensions.x;
+//         img.height = dimensions.y;
+//         img.src = canvas.toDataURL();
+//         document.getElementById('images').innerHTML = '';
+//         document.getElementById('images').appendChild(img);
+//     });
+// }

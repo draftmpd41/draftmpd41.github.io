@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="lib/leaflet-sidebar.css" />
 <link href="lib/tabulator.min.css" rel="stylesheet">
 <link href="lib/simTree.css" rel="stylesheet">
+<link rel="stylesheet" href="lib/Leaflet.BigImage.min.css">
 
 <!-- Put the CSSs first and JSs next -->
 
@@ -25,7 +26,8 @@
 <script src="lib/tabulator.min.js" type="text/javascript"></script>
 <script src="lib/leaflet-hash.min.js"></script>
 <script src="lib/simTree.js"></script>
-
+<script src="lib/Leaflet.BigImage.min.js"></script>
+<script src="lib/leaflet.browser.print.min.js"></script>
 <style>
 body {
     padding: 0;
@@ -92,6 +94,7 @@ red {
     <li><a href="#home" role="tab" title="layers"><i class="fa fa-bars"></i></a></li>
     <!-- <li><a href="#submit" role="tab" title="Share your Input"><i class="fa fa-pencil"></i></a></li>
     <li><a href="#messages" role="tab" title="Citizens Inputs"><i class="fa fa-envelope"></i></a></li> -->
+    <li><a href="print.html" target="_blank" role="tab" title="Print (opens new page)"><i class="fa fa-print"></i></a></li>
     <li><a href="https://github.com/draftmpd41/draftmpd41.github.io" role="tab" target="_blank" title="See the code"><i class="fa fa-github"></i></a></li>
     
 </ul>
@@ -109,9 +112,10 @@ red {
     </h1>
     <br>
     <div id="tree"></div>
-    <br><p>Location: <span id="latlong"></span> 
+    <br><p>Location: <span id="latlong"></span></p>
         
 </div>
+
 
 <div class="sidebar-pane" id="settings">
 <h1 class="sidebar-header">About<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1>
@@ -127,12 +131,13 @@ red {
     - <a href="https://www.mainbhidilli.com/">Mein Bhi Dilli Campaign</a><br>
     - <a href="https://timesofindia.indiatimes.com/city/delhi/80-in-survey-say-no-clue-about-ddas-masterplan/articleshow/80193521.cms">80% in survey say no clue about DDA’s masterplan. </a><br>
     - <a href="https://igsss.org/wp-content/uploads/2020/12/Assessment-of-Peoples-Awareness-on-Delhi-Master-Plan-2021-41-1.pdf">Assessment of People’s Awareness on Delhi Master Plan 2021-41</a>
-    <br><br>
+    </p>
+    <br>
 
     <p>Disclaimer: The data displayed here is purely for public information use, and its ownership lies with the publishing government agency(s) involved. The volunteers behind this site cannot give any guarantees of accuracy. Please go on links shared above to get the originals before taking any decisions/action.</p> 
 </small>
 
-</p>
+
 
 </div>
 
