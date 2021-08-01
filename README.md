@@ -26,3 +26,10 @@ Coding by: [Nikhil VJ](https://nikhilvj.co.in) on behalf of Kaisyn Consultancy a
 - https://igsss.org/wp-content/uploads/2020/12/Assessment-of-Peoples-Awareness-on-Delhi-Master-Plan-2021-41-1.pdf
 
 
+## Print
+![print.png](print.png)
+
+Click the print icon on left sidebar to open a page where you can adjust various settings and take a printout.
+
+Only the map portion will be printed. You can increase the height/width pixels and then print to A0/A1/A2 size etc to take large high-res prints.
+

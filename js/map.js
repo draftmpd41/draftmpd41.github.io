@@ -18,23 +18,36 @@ var firstRunDone = false; // for preventing 3-time calling of mapStops() on star
 
 // ######################################
 // Initiate Leaflet MAP
-// background layers, using Leaflet-providers plugin. See https://github.com/leaflet-extras/leaflet-providers
+// background layers, using Leaflet-providers plugin. 
+// See https://leaflet-extras.github.io/leaflet-providers/preview/ , https://github.com/leaflet-extras/leaflet-providers
 var OSM = L.tileLayer.provider('OpenStreetMap.Mapnik');
 var cartoVoyager = L.tileLayer.provider('CartoDB.VoyagerLabelsUnder');
 var cartoPositron = L.tileLayer.provider('CartoDB.Positron');
 var cartoDark = L.tileLayer.provider('CartoDB.DarkMatter');
 var esriWorld = L.tileLayer.provider('Esri.WorldImagery');
-var gStreets = L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}',{maxZoom: 20, subdomains:['mt0','mt1','mt2','mt3']});
-var gHybrid = L.tileLayer('https://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{maxZoom: 20, subdomains:['mt0','mt1','mt2','mt3']});
+var Esri2 = L.tileLayer.provider('Esri.WorldTopoMap');
+var Esri3 = L.tileLayer.provider('Esri.WorldGrayCanvas');
+var OpenTopoMap = L.tileLayer.provider('OpenTopoMap');
+var Stadia1 = L.tileLayer.provider('Stadia.AlidadeSmooth');
+var CyclOSM = L.tileLayer.provider('CyclOSM');
+var Stamen1 = L.tileLayer.provider('Stamen.TonerLite');
+var Stamen2 = L.tileLayer.provider('Stamen.Terrain');
+
 
 var baseLayers = { 
     "CartoDB Light": cartoPositron, 
     "CartoDB Dark": cartoDark, 
     "OpenStreetMap.org" : OSM, 
     "CartoDB Voyager":cartoVoyager, 
-    "ESRI Satellite": esriWorld, 
-    "gStreets": gStreets, 
-    "gHybrid": gHybrid };
+    "Esri.WorldImagery": esriWorld,
+    "Esri.WorldTopoMap": Esri2,
+    "Esri.WorldGrayCanvas": Esri3,
+    "OpenTopoMap": OpenTopoMap,
+    "Stamen.TonerLite": Stamen1,
+    "Stamen.Terrain": Stamen2,
+    "Stadia.AlidadeSmooth": Stadia1,
+    "CyclOSM": CyclOSM,
+};
 
 var map = new L.Map('map', {
     center: STARTLOCATION,
@@ -47,19 +60,38 @@ var map = new L.Map('map', {
     maxBoundsViscosity: MAXBOUNDSVISCOSITY
 });
 
-var sidebar = L.control.sidebar('sidebar').addTo(map);
+if(!window.location.pathname.endsWith("print.html")) {
+    var sidebar = L.control.sidebar('sidebar').addTo(map);
+    
+    // Add in a crosshair for the map. From https://gis.stackexchange.com/a/90230/44746
+    var crosshairIcon = L.icon({
+        iconUrl: crosshairPath,
+        iconSize:     [crosshairSize, crosshairSize], // size of the icon
+        iconAnchor:   [crosshairSize/2, crosshairSize/2], // point of the icon which will correspond to marker's location
+    });
+    crosshair = new L.marker(map.getCenter(), {icon: crosshairIcon, interactive:false});
+    crosshair.addTo(map);
+    
+}
 
 $('.leaflet-container').css('cursor','crosshair'); // from https://stackoverflow.com/a/28724847/4355695 Changing mouse cursor to crosshairs
 
 L.control.scale({metric:true, imperial:false}).addTo(map);
 
+// Move the crosshair to the center of the map when the user pans
+map.on('move', function(e) {
+    var currentLocation = map.getCenter();
+    if(!window.location.pathname.endsWith("print.html")) crosshair.setLatLng(currentLocation);
+    $('#latlong').html(`${currentLocation.lat.toFixed(4)},${currentLocation.lng.toFixed(4)}`);
+});
 
 // map panes
 map.createPane('planPane'); map.getPane('planPane').style.zIndex = 540;
 map.createPane('linePane'); map.getPane('linePane').style.zIndex = 550;
 
 // layers
-var planLayer = new L.layerGroup(null, {pane: 'planPane'});
+var planLayer = new L.FeatureGroup(null, {pane: 'planPane'});
+// https://gis.stackexchange.com/a/180680/44746 use FeatureGroup instead of LayerGroup
 
 // SVG renderer
 var myRenderer = L.canvas({ padding: 0.5, pane: 'planPane' });
@@ -70,34 +102,29 @@ var overlays = {
 };
 planLayer.addTo(map);
 
-var layerControl = L.control.layers(baseLayers, overlays, {collapsed: true, autoZIndex:false}).addTo(map); 
+var layerControl = L.control.layers(baseLayers, overlays, {collapsed: true, autoZIndex:false, position:'topleft'}).addTo(map); 
 
-// Add in a crosshair for the map. From https://gis.stackexchange.com/a/90230/44746
-var crosshairIcon = L.icon({
-    iconUrl: crosshairPath,
-    iconSize:     [crosshairSize, crosshairSize], // size of the icon
-    iconAnchor:   [crosshairSize/2, crosshairSize/2], // point of the icon which will correspond to marker's location
-});
-crosshair = new L.marker(map.getCenter(), {icon: crosshairIcon, interactive:false});
-crosshair.addTo(map);
-// Move the crosshair to the center of the map when the user pans
-map.on('move', function(e) {
-    var currentLocation = map.getCenter();
-    crosshair.setLatLng(currentLocation);
-    $('#latlong').html(`${currentLocation.lat.toFixed(4)},${currentLocation.lng.toFixed(4)}`);
-});
+
 
 // lat, long in url
 var hash = new L.Hash(map);
 
 
+// 2021-07-29: Image export, from https://github.com/pasichnykvasyl/Leaflet.BigImage
+// L.control.bigImage().addTo(map);
+
+// https://github.com/Igor-Vladyka/leaflet.browser.print
+// L.control.browserPrint().addTo(map)
+
 // ######################################
 // RUN ON PAGE LOAD
 
 $(document).ready(function() {
-    setTimeout(function () {
-        sidebar.open('home');
-    }, 500);
+    if(!window.location.pathname.endsWith("print.html")) {
+        setTimeout(function () {
+            sidebar.open('home');
+        }, 500);
+    }
     loadCSV();
 });
 
@@ -267,3 +294,16 @@ function loadGeojson(r) {
     });
 }
 
+// function makeImage() {
+//     leafletImage(map, function(err, canvas) {
+//         // now you have canvas
+//         // example thing to do with that canvas:
+//         var img = document.createElement('img');
+//         var dimensions = map.getSize();
+//         img.width = dimensions.x;
+//         img.height = dimensions.y;
+//         img.src = canvas.toDataURL();
+//         document.getElementById('images').innerHTML = '';
+//         document.getElementById('images').appendChild(img);
+//     });
+// }
