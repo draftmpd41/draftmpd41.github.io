@@ -17,3 +17,6 @@ const LAYERS_CSV = 'config/map_layers.csv';
 // Print related
 const ORIG_W = 1000;
 const ORIG_H = 1450;
+
+// interactive citizens inputs
+const APIpath = 'https://server2.nikhilvj.co.in/draftmpd41_backend/API/';

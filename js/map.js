@@ -88,17 +88,23 @@ map.on('move', function(e) {
 // map panes
 map.createPane('planPane'); map.getPane('planPane').style.zIndex = 540;
 map.createPane('linePane'); map.getPane('linePane').style.zIndex = 550;
+map.createPane('submittedPane'); map.getPane('submittedPane').style.zIndex = 610;
+map.createPane('approvedPane'); map.getPane('approvedPane').style.zIndex = 620;
 
 // layers
 var planLayer = new L.FeatureGroup(null, {pane: 'planPane'});
 // https://gis.stackexchange.com/a/180680/44746 use FeatureGroup instead of LayerGroup
+var submittedLayer = new L.layerGroup(null, {pane: 'submittedPane'});
+var approvedLayer = new L.layerGroup(null, {pane: 'approvedPane'});
 
 // SVG renderer
 var myRenderer = L.canvas({ padding: 0.5, pane: 'planPane' });
 
 
 var overlays = {
-    "Draft Plan": planLayer
+    "Draft Plan": planLayer,
+    "Submitted Inputs": submittedLayer,
+    "Approved Inputs": approvedLayer
 };
 planLayer.addTo(map);
 
@@ -126,6 +132,7 @@ $(document).ready(function() {
         }, 500);
     }
     loadCSV();
+    fetchInputs();
 });
 
 // ######################################
@@ -294,16 +301,4 @@ function loadGeojson(r) {
     });
 }
 
-// function makeImage() {
-//     leafletImage(map, function(err, canvas) {
-//         // now you have canvas
-//         // example thing to do with that canvas:
-//         var img = document.createElement('img');
-//         var dimensions = map.getSize();
-//         img.width = dimensions.x;
-//         img.height = dimensions.y;
-//         img.src = canvas.toDataURL();
-//         document.getElementById('images').innerHTML = '';
-//         document.getElementById('images').appendChild(img);
-//     });
-// }
+
