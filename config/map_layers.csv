@@ -25,3 +25,4 @@ Road Railway Metro,UER Buffer,,ROAD_RAILWAY_METRO_LINES_UER_BUFFER.geojson,#d9d9
 Boundaries,DDA Zone Boundary,,Boundaries_DDA_ZONE_Boundary.geojson,#bc80bd,LineString
 Boundaries,Lutyen Bungalow Zone,,Boundaries_LUTYEN_BUNGALOW_ZONE.geojson,#ccebc5,LineString
 Boundaries,Reserved Forest Boundary,,Boundaries_RESERVED_FOREST_BOUNDARY.geojson,#66c2a5,LineString
+Delhishelterboard.in,JJ Bastis,,delhishelterboard-jj.geojson,#bc80bd,Polygon
